@@ -1,12 +1,5 @@
-import csv
-import datetime
-import pytz
+
 import requests
-import subprocess
-import urllib
-import uuid
-import speech_recognition as sr
-import pyttsx3
 from extensions import db
 from models import Weather, Entry, Emotions, Users
 from flask import redirect, render_template, session, request, jsonify
@@ -14,16 +7,14 @@ from functools import wraps
 import pandas as pd
 
 # HUGGINGFACE
-from transformers import AutoTokenizer, pipeline, AutoModelForSequenceClassification
-from scipy.special import softmax
+from transformers import pipeline
 
 # heatplot
-from data_utils import get_extracted_data, get_all_text
+from data_utils import get_all_text
     #transform_data_for_stacked_chart
 import seaborn as sns
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
-from matplotlib.patches import Circle
 
 import io
 import base64
@@ -42,8 +33,6 @@ nltk.download('stopwords')
 # for top emotions
 from sqlalchemy import func
 
-# FOR CIRCUMPLEX
-import numpy as np
 
 def login_required(f):
     """

@@ -2,7 +2,7 @@ from extensions import db  # Import the SQLAlchemy database instance from your F
 from models import Entry, Emotions, Weather, Users  # Import your model classes
 import pandas as pd
 from flask_session import Session
-from flask import session, jsonify
+from flask import session
 
 
 def get_all_text():

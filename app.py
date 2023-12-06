@@ -1,10 +1,10 @@
 import os
 
-from flask import Flask, flash, redirect, render_template, request, session, jsonify, url_for
+from flask import Flask, flash, redirect, render_template, request, session,  url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import login_required, apology, fetch_weather, get_weather_data, emotions_hf, add_entry, plot_heatmap, get_frequent_words, get_today_emotions, get_week_emotions, get_all_emotions, get_top_emotions_agg, get_last_week_emotions, calculate_percent_change, emotion_names,desired_order
+from helpers import login_required, apology, fetch_weather, emotions_hf, add_entry, plot_heatmap, get_frequent_words, get_today_emotions, get_week_emotions, get_all_emotions, get_top_emotions_agg, get_last_week_emotions, calculate_percent_change, emotion_names
     # plot_stacked_chart
 from extensions import db
 from datetime import datetime, timedelta
@@ -17,7 +17,6 @@ from data_utils import get_extracted_data, transformed_data_daily, transformed_d
 import seaborn as sns
 import matplotlib
 matplotlib.use('Agg') # Set a non-GUI backend
-import matplotlib.pyplot as plt
 
 # row span
 from collections import defaultdict
