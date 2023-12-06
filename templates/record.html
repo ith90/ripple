@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Emotion Tracker 
+{% endblock %}
+
+{% block main %}
+    <!-- FIRST ROW -->
+    <div class="container" >
+        <div class="row align-items-center">
+
+            <!-- TOP QUICK INSIGHTS -->
+            <div class="col">
+
+                <h1>Thought Entry</h1>
+
+                <p>
+                    @ {{timestamp.strftime('%a %Y-%m-%d %H:%M')}}. <br>
+
+                </p>
+
+                <form action="/record" method="post">
+                    <textarea name="user_entry" placeholder="Enter your thoughts here..." style="width: 400px; height:300px;padding: 10px;"></textarea>
+                    <br>
+                    <br>
+                    <!-- <input type="text" name="user_entry" style="width: 400px; height: 300px"> -->
+                    <input type="submit" value="Submit New Entry" onclick="getLocation()" class="btn btn-light">
+                </form>
+                <br>
+                <div>
+                    {% if user_entry %}
+                        <h4>
+                            Your entry: {{ user_entry }} <br><br>
+          
+                            {% if new_entry.emotions %}
+                                Exhibited these emotions: 
+                                <br>
+                                {% for emotion, score in new_entry.emotions[0].top_emotions() %}
+                                    {{ emotion }}: {{ '%.2f%%' | format(score * 100) }} 
+                                {% endfor %}
+                            {% endif %}
+                        </h4>
+                    {% endif %}
+                </div>
+            </div>
+
+            
+        </div> 
+    </div> 
+
+        
+
+
+
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}

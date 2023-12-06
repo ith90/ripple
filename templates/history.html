@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Emotion Tracker 
+{% endblock %}
+
+{% block main %}
+    <h1>History of Thoughts</h1><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-11">
+                <div class="table-responsive" >
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>DAY</th>
+                                <th>TIME</th>
+                                <th class="w-50">ENTRY</th>
+                                <th>WEATHER</th>
+                                <th class="w-25" >TOP EMOTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry, rowspan in entries %}
+                                <tr>
+                                    {% if rowspan %}
+                                        <td rowspan="{{ rowspan }}">{{ entry.timestamp.strftime('%Y-%m-%d')}}</td>
+                                    {% endif %}
+                                    <td>{{ entry.timestamp.strftime('%H:%M:%S')}}</td>
+                                    <td>{{ entry.text }}</td>
+                                    <td>{{ entry.weather.description }}</td>
+                                    <td>
+                                        {% if entry.emotions %}
+                                            {% for emotion, score in entry.emotions[0].top_emotions() %}
+                                                {{ emotion }},
+                                            {% endfor %}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+12/2:
+Acoomplished: 
+- heatmap: emotion vs entry, day, weather
+- most frequent words from all entry
+- make textbox bigger
+- user id for all
+- change font to roboto
+- history table layout!
+- reverse query, most recent top, or ability to filter??
+- possibly two columns
+
+
+TODO:
+Server
+- how to send this oline
+- where to put database?
+
+Layout
+
+- welcome [NAME]
+- possibly input location into db?
+
+
+History:
+
+
+Analysis:
+- top emotion: today, this week, all time
+- emotions should be positive to negative??
+
+
+Design
+- stacked graphs? D3.JS
+- should different weather have different colors?
+- change font on heatmap
+
+Next steps;
+- percent change of emotions from last week.

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Emotion Tracker 
+{% endblock %}
+
+{% block main %}
+    <br>
+    <br>
+    <h1>How were you feeling over time?</h1>
+    <br>
+    <br>
+    <!-- Include the D3.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/+esm" type="module"></script>
+    <script type = "module" src = "/static/stackedd3.js"></script>
+
+    <!-- <script type="text/javascript">
+        var rawEmotions = {{ emotion_data_json | safe }};
+    </script> -->
+
+    <!-- FIRST ROW -->
+    <div class="container">
+        <div class="row align-items-start">
+
+            <!-- TOP QUICK INSIGHTS -->
+            <div class="col">
+                <h3>Top Emotions Today</h3>
+                <h3>Top Emotions This Week</h3>
+                <h3>Top Emotions All Time</h3>
+                <br>
+        
+
+                <h3>Your most frequently used words</h3>
+   
+                <!-- HTML to display the heatmap -->
+                {% for words in frequent_words %}
+                    {{ words[0] }}: {{ words[1] }} <br>
+                {% endfor %}
+            </div>
+
+            <!-- TRENDS OVER TIME -->
+            <div class="col">
+                <h3>Trends!</h3>
+<!-- 
+                Emotional fluctuations:
+                <img src="data:image/png;base64,{{ stacked_plot_url }}" alt="Heatmap" style=" padding: 20px" class="img-fluid"> -->
+
+                <!-- HTML to display the heatmap -->
+                {% for url in heatmap_plot_urls %}
+                    <img src="data:image/png;base64,{{ url }}" alt="Heatmap" style=" padding: 20px" class="img-fluid">
+                    <br>
+                    <br>
+                {% endfor %}
+
+            
+            </div>
+        </div>
+    </div>
+    
+    <!-- Container for the chart -->
+    <div id="chart-container"></div>
+
+    
+{% endblock %}
