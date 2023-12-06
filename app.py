@@ -1,6 +1,5 @@
 import os
 
-from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -61,6 +60,11 @@ Session(app)
 with app.app_context():
     db.create_all()
 
+@app.route("/")
+def index():
+    app.logger.debug("Entering the index route")
+    return render_template("index.html")
+    
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -141,10 +145,7 @@ def after_request(response):
     return response
 
 
-@app.route("/")
-def index():
-    app.logger.debug("Entering the index route")
-    return render_template("index.html")
+
    
 
 @app.route("/record", methods=["GET", "POST"])

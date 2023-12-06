@@ -1,3 +1,2 @@
-web: gunicorn gettingstarted.wsgi
-web: gunicorn ripple:app
-
+# TODO: Modify this Procfile to fit your needs
+web: gunicorn app:app

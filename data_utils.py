@@ -3,7 +3,6 @@ from models import Entry, Emotions, Weather, Users  # Import your model classes
 import pandas as pd
 from flask_session import Session
 from flask import session, jsonify
-import numpy as np
 
 
 def get_all_text():
