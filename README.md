@@ -1,4 +1,5 @@
 # Emotion Tracker
+Video: https://youtu.be/HEFhduQ-SFo
 
 ## Project Overview
 The Emotion Tracker is a web-based application designed to help users track and understand their emotional fluctuations. It allows users to record their thoughts, analyzes these thoughts for emotional content, correlates them with current weather conditions, and visualizes emotional trends.
