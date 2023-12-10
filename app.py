@@ -48,12 +48,7 @@ app = create_app()
 if __name__ == "__main__":
     # Use Heroku's provided port if available
     port = int(os.environ.get('PORT', 5000))
-    # app.run(host='0.0.0.0', port=port, debug=False)
-
-# # Configure session to use filesystem (instead of signed cookies)
-# app.config["SESSION_PERMANENT"] = False
-# app.config["SESSION_TYPE"] = "filesystem"
-# Session(app)
+    app.run(host='0.0.0.0', port=port, debug=False)
     
 # Initialize database
 with app.app_context():
