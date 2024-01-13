@@ -123,47 +123,6 @@ def apology(message, code=400):
 
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
-# def speech_to_text(audio_file_path):
-#     """Convert speech from an audio file to text."""
-#     recognizer = sr.Recognizer()
-
-#     with sr.AudioFile(audio_file_path) as source:
-#         audio_data = recognizer.record(source)
-#         try:
-#             text = recognizer.recognize_google(audio_data)
-#             return text.lower()
-#         except sr.UnknownValueError:
-#             return "Google Speech Recognition could not understand audio"
-#         except sr.RequestError as e:
-#             return f"Could not request results from Google Speech Recognition service; {e}"
-#         except Exception as e:
-#             return f"An error occurred: {e}"
-
-
-
-
-# def speech_to_text(speech):
-#     """Speech to text"""
-#     recognizer = speech_recognition.Recognizer()
-    
-#     while True:
-        
-#         try:
-
-#             with speech_recognition.Microphone() as mic:
-#                 recognizer.adjust_for_ambient_noise(mic, duration=0.2)
-#                 audio = recognizer.listen(mic)
-
-#                 text = recognizer.recognize_google(audio)
-#                 text = text.lower()
-
-#                 print(f"Reecognizeed {text}")
-
-#         except speech_recognition.UnknownValueError():
-            
-#             recognizer = speech_recognition.Recognizer()
-#             continue
-
 
 # List of all emotion attributes in the Emotions model
 
@@ -282,43 +241,6 @@ def plot_heatmap(heatmap_data, title, xlabel, ylabel):
 
     return plot_url
 
-# def plot_stacked_chart(extracted_data, title, xlabel, ylabel):
-#     # Transform data
-#     long_df = transform_data_for_stacked_chart(extracted_data)
-
-#     # Plot
-#     ax = plt.subplots(figsize=(15, 7))
-
-#     # Initialize a dictionary to keep track of the 'bottom' for each bar stack
-#     bottoms = dict.fromkeys(long_df['entry_identifier'].unique(), 0)
-
-#     for emotion in long_df['Emotion'].unique():
-#         emotion_data = long_df[long_df['Emotion'] == emotion]
-#         ax.bar(emotion_data['entry_identifier'], emotion_data['Percentage'], 
-#                bottom=[bottoms[identifier] for identifier in emotion_data['entry_identifier']], 
-#                label=emotion)
-        
-#         # Update the bottoms
-#         for identifier, percentage in zip(emotion_data['entry_identifier'], emotion_data['Percentage']):
-#             bottoms[identifier] += percentage
-
-#     ax.set_xlabel(xlabel)
-#     ax.set_ylabel(ylabel)
-#     ax.set_title(title)
-#     ax.legend(title="Emotions", bbox_to_anchor=(1.05, 1), loc='upper left')
-#     plt.xticks(rotation=45)
-#     plt.tight_layout()
-
-#     # Save to BytesIO object
-#     img = io.BytesIO()
-#     plt.savefig(img, format='png', bbox_inches='tight')
-#     img.seek(0)
-#     plot_url = base64.b64encode(img.getvalue()).decode('utf-8')
-    
-#     # Close the figure
-#     plt.close()
-
-#     return plot_url
 
 def get_frequent_words(num_words =20):
     all_text= get_all_text()
@@ -430,67 +352,3 @@ def get_last_week_emotions(db, user_id, last_week_start, last_week_end):
         Entry.timestamp <= last_week_end
     ).group_by(func.strftime('%Y-%W', Entry.timestamp)).first()
 
-# def plot_circumplex():
-#     #emotions_data = get_extracted_data()
-
-#     # Sample data: Replace this with your actual emotion data retrieval logic
-#     emotions_data = {
-#         'Happiness': 0.8,
-#         'Sadness': 0.5,
-#         'Anger': 0.3,
-#         # ... other emotions
-#     }
-
-#     # Define the positions of each emotion on the plot
-#     # These should be normalized to the range [0, 1] if they represent percentages
-#     # or appropriately scaled if they represent some other range of values
-#     positions = {
-#         'Happiness': (0.75, 0.75),
-#         'Sadness': (0.25, 0.75),
-#         'Anger': (0.25, 0.25)
-#     }
-
-#     colors = {
-#         'Happiness': 'green',
-#         'Sadness': 'blue',
-#         'Anger': 'red',
-#     }
-
-#     # Create a plot
-#     fig, ax = plt.subplots(figsize=(10,10))
-
-#     # # Plot each emotion as a circle
-#     # for emotion, intensity in emotions_data.items():
-#     #     circle = Circle(positions[emotion], intensity / 2, alpha=0.5, label=emotion)
-#     #     ax.add_patch(circle)
-
-#     # Plot each emotion as a circle with a gradient effect
-#     for emotion, intensity in emotions_data.items():
-#         position = positions[emotion]
-#         color = colors[emotion]
-        
-#         # Create gradient effect by overlaying multiple circles
-#         for i in range(10, 0, -1):  # Decreasing range for overlay effect
-#             alpha_value = (i / 10) ** 2  # Exponential decay for alpha value
-#             radius = (intensity / 2) * (i / 10)  # Decreasing radius
-#             circle = Circle(position, radius, alpha=alpha_value, color=color)
-#             ax.add_patch(circle)
-
-#     # Customizations
-#     ax.set_xlim(0, 1)
-#     ax.set_ylim(0, 1)
-#     ax.set_xticks([])
-#     ax.set_yticks([])
-#     ax.set_aspect('equal')
-#     ax.legend()
-
-#     # Save to BytesIO object
-#     img = io.BytesIO()
-#     plt.savefig(img, format='png', bbox_inches='tight')
-#     img.seek(0)
-#     circumplex_url = base64.b64encode(img.getvalue()).decode('utf-8')
-
-#     # Close the figure
-#     plt.close()
-
-#     return circumplex_url

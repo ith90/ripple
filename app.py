@@ -214,44 +214,6 @@ def history():
 
             return render_template('history.html', entries=entries_with_rowspan)
 
- 
-# @app.route("/pattern", methods=["GET", "POST"])
-# @login_required
-# def pattern():
-#     """Show Trend and user emotion pattern"""
-#     if request.method == "GET":
-
-#         # get frequent wordsF
-#         frequent_words= get_frequent_words() 
-
-#         #extract data
-#         extracted_data = get_extracted_data()
-
-
-#         # stackplot here
-#         stacked_data = transform_data_for_stacked_chart(extracted_data)
-#         stacked_plot_url= plot_stacked_chart(stacked_data, title="Emotional Fluctuations", xlabel="Time", ylabel="Emotions")
-        
-#         # heat map here
-#         heatmap_data_daily = transformed_data_daily(extracted_data) 
-#         heatmap_data_entry = transformed_data_entry(extracted_data) 
-#         heatmap_data_weather = transformed_data_weather(extracted_data) 
-
-#         # Initialize an empty list to store heatmap URLs
-#         heatmap_plot_urls = []
-
-#         # Append URLs for each heatmap to the list
-#         heatmap_plot_urls.append(plot_heatmap(heatmap_data_daily, title="Emotion Change - Daily", xlabel="Emotion", ylabel="Day"))
-#         heatmap_plot_urls.append(plot_heatmap(heatmap_data_entry, title="Emotion Change - Entry", xlabel="Emotion", ylabel="Entry"))
-#         heatmap_plot_urls.append(plot_heatmap(heatmap_data_weather, title="Emotion Change - Weather", xlabel="Emotion", ylabel="Weather"))
-
-#         # data for d3js
-#         emotion_data_json = get_emotion_data_json()
-
-
-
-#         return render_template("pattern.html", heatmap_plot_urls=heatmap_plot_urls, emotion_data_json=emotion_data_json, frequent_words=frequent_words, stacked_plot_url=stacked_plot_url)
-
 @app.route("/analyze", methods=["GET", "POST"])
 @login_required
 def analyze():    
