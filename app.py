@@ -13,7 +13,6 @@ from models import Weather, Entry, Emotions, Users
 
 # heatplot
 from data_utils import get_extracted_data, transformed_data_daily, transformed_data_entry, transformed_data_weather
-    #get_emotion_data_json, transform_data_for_d3, transform_data_for_stacked_chart
 import seaborn as sns
 import matplotlib
 matplotlib.use('Agg') # Set a non-GUI backend

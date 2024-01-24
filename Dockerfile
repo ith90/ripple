@@ -1,15 +1,15 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3-alpine3.11
 
-# Update the package list and install git
-RUN apt-get update && apt-get install -y \
-    git \
-    gcc \
-    libasound2-dev \
-    libportaudio2 \
-    libportaudiocpp0 \
-    portaudio19-dev \
-&& rm -rf /var/lib/apt/lists/*
+# # Update the package list and install git
+# RUN apt-get update && apt-get install -y \
+#     git \
+#     gcc \
+#     libasound2-dev \
+#     libportaudio2 \
+#     libportaudiocpp0 \
+#     portaudio19-dev \
+# && rm -rf /var/lib/apt/lists/*
 
 # Set the working directory to /app
 WORKDIR /app
@@ -27,4 +27,4 @@ EXPOSE 5000
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
+CMD python ./app.py
