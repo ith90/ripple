@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, flash, redirect, render_template, request, session,  url_for
 from flask_session import Session
+from flask_caching import Cache
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_migrate import Migrate
 from helpers import login_required, apology, fetch_weather, emotions_hf, add_entry, plot_heatmap, get_frequent_words, get_today_emotions, get_week_emotions, get_all_emotions, get_top_emotions_agg, get_last_week_emotions, calculate_percent_change, emotion_names, load_model
@@ -28,6 +29,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 migrate = Migrate()
+cache = Cache()
 
 def create_app():
     app = Flask(__name__)
@@ -44,12 +46,17 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app,db)	
 
+    # Configure for Flask-Caching
+    app.config['CACHE_TYPE'] = 'simple'  # Simple cache type
+    cache.init_app(app)
+
     # Additional setup like registering blueprints
     load_model()
 
     return app
 
 app = create_app()
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)

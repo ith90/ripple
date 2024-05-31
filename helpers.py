@@ -58,13 +58,22 @@ def login_required(f):
 
 def get_weather_data(lat, lon):
 
+    # Check if the data is cached
+    cache = current_app.extensions['cache']
+    cache_key = f"weather_{lat}_{lon}"
+    cached_weather = cache.get(cache_key)
+
+    if cached_weather:
+        print("Using cached weather data")
+        return cached_weather
+
     # API Key and URL
     api_key = "641441002b2d913f06a4f91d4e4dab72"
-   
     url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}"
-
     response = requests.get(url)
     print("Status Code:", response.status_code)
+
+
     if response.status_code == 200:
         print("Success!")
         data = response.json()
@@ -88,6 +97,10 @@ def get_weather_data(lat, lon):
         db.session.commit()
 
         print (weather)
+        
+        # Cache the weather data
+        cache.set(cache_key, weather)
+
         return weather
     else:
         print("Failed to fetch data from API")
@@ -147,6 +160,11 @@ def emotions_hf(entry):
     if classifier is None:
         load_model()
 
+    cache = current_app.extensions['cache']
+    cached_result = cache.get(entry)
+    if cached_result:
+        return cached_result
+
     # data output as lists
     data = classifier(entry)
 
@@ -189,6 +207,7 @@ def emotions_hf(entry):
     print("COMMITTING EMOTION DATA")
     db.session.add(emotions)
     db.session.commit()
+    cache.sett(entry, emotions.id)
 
     print("SUCCESS commiting emotions")
 
