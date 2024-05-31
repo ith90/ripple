@@ -4,7 +4,7 @@ from flask import Flask, flash, redirect, render_template, request, session,  ur
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_migrate import Migrate
-from helpers import login_required, apology, fetch_weather, emotions_hf, add_entry, plot_heatmap, get_frequent_words, get_today_emotions, get_week_emotions, get_all_emotions, get_top_emotions_agg, get_last_week_emotions, calculate_percent_change, emotion_names
+from helpers import login_required, apology, fetch_weather, emotions_hf, add_entry, plot_heatmap, get_frequent_words, get_today_emotions, get_week_emotions, get_all_emotions, get_top_emotions_agg, get_last_week_emotions, calculate_percent_change, emotion_names, load_model
     # plot_stacked_chart
 from extensions import db
 from datetime import datetime, timedelta
@@ -45,6 +45,7 @@ def create_app():
     migrate.init_app(app,db)	
 
     # Additional setup like registering blueprints
+    load_model()
 
     return app
 

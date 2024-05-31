@@ -33,9 +33,14 @@ nltk.download('stopwords')
 # for top emotions
 from sqlalchemy import func
 
+classifier = None
 
-classifier = pipeline(task="text-classification", model="SamLowe/roberta-base-go_emotions", top_k=None)
+def load_model():
+    global classifier
+    if classifier is None:
+        classifier = pipeline(task="text-classification", model="SamLowe/roberta-base-go_emotions", top_k=None)
 
+load_model()
 
 def login_required(f):
     """
@@ -137,6 +142,10 @@ emotion_names = [
 
 # Roberta Hugging face
 def emotions_hf(entry):
+
+    global classifier
+    if classifier is None:
+        load_model()
 
     # data output as lists
     data = classifier(entry)
