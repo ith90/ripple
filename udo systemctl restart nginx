@@ -1,0 +1,10 @@
+[0;1;32m●[0m flaskapp.service - Gunicorn instance to serve flaskapp
+   Loaded: loaded (/etc/systemd/system/flaskapp.service; enabled; vendor preset: enabled)
+   Active: [0;1;32mactive (running)[0m since Thu 2024-05-30 23:47:14 EDT; 93ms ago
+ Main PID: 3261 (gunicorn)
+    Tasks: 1 (limit: 1149)
+   Memory: 6.5M
+   CGroup: /system.slice/flaskapp.service
+           └─3261 /opt/ripple/venv/bin/python3 /opt/ripple/venv/bin/gunicorn --workers 1 --worker-class gevent --bind unix:flaskapp.sock -m 007 wsgi:app
+
+May 30 23:47:14 localhost systemd[1]: Started Gunicorn instance to serve flaskapp.
