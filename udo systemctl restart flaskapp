@@ -1,0 +1,16 @@
+[0;1;31m●[0m flaskapp.service - Gunicorn instance to serve flaskapp
+   Loaded: loaded (/etc/systemd/system/flaskapp.service; enabled; vendor preset: enabled)
+   Active: [0;1;31mfailed[0m (Result: exit-code) since Fri 2024-05-31 22:26:29 EDT; 11min ago
+  Process: 21588 ExecStart=/opt/ripple/venv/bin/gunicorn --workers 1 --worker-class gevent --timeout 120 --bind unix:flaskapp.sock -m 007 wsgi:app [0;1;31m(code=exited, status=3)[0m
+ Main PID: 21588 (code=exited, status=3)
+
+May 31 22:26:29 localhost gunicorn[21588]:     from app import create_app
+May 31 22:26:29 localhost gunicorn[21588]:   File "/opt/ripple/app.py", line 5, in <module>
+May 31 22:26:29 localhost gunicorn[21588]:     from flask_caching import Cache
+May 31 22:26:29 localhost gunicorn[21588]: ModuleNotFoundError: No module named 'flask_caching'
+May 31 22:26:29 localhost gunicorn[21588]: [2024-05-31 22:26:29 -0400] [21591] [INFO] Worker exiting (pid: 21591)
+May 31 22:26:29 localhost gunicorn[21588]: [2024-05-31 22:26:29 -0400] [21588] [ERROR] Worker (pid:21591) exited with code 3
+May 31 22:26:29 localhost gunicorn[21588]: [2024-05-31 22:26:29 -0400] [21588] [ERROR] Shutting down: Master
+May 31 22:26:29 localhost gunicorn[21588]: [2024-05-31 22:26:29 -0400] [21588] [ERROR] Reason: Worker failed to boot.
+May 31 22:26:29 localhost systemd[1]: [0;1;39m[0;1;31m[0;1;39mflaskapp.service: Main process exited, code=exited, status=3/NOTIMPLEMENTED[0m
+May 31 22:26:29 localhost systemd[1]: [0;1;39m[0;1;31m[0;1;39mflaskapp.service: Failed with result 'exit-code'.[0m
